@@ -8,7 +8,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     trigger('divState', [
       state('normal', style({
         'background-color': 'red',
-        transform: 'translateX(0) scale(1)'
+        transform: 'translateX(0)'
       })),
       state('highlighted', style({
         'background-color': 'blue',
@@ -41,9 +41,17 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
         }),
         animate(500)
       ])
-    ])
+    ]),
+    trigger('list1', [
+      state('in', style({
+        opacity: 1,
+        transform: 'translateX(0)'
+      })),
+      transition('void => *', animate(300)),
+    ]),
   ]
 })
+
 export class AppComponent {
   state = 'normal';
   wildState = 'normal';
