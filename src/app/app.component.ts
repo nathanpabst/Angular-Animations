@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { trigger, state, style, transition, animate, keyframes, group } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -30,13 +30,13 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
         'background-color': 'green',
         transform: 'translateX(0) scale(0.5)'
       })),
-      transition('normal <=> highlighted', animate(300)),
+      transition('normal => highlighted', animate(300)),
       transition('highlighted => normal', animate(800)),
       transition('shrunken <=> *', [
         style({
           'background-color': 'orange'
         }),
-        animate(100), style({
+        animate(1000), style({
           borderRadius: '50px'
         }),
         animate(500)
@@ -91,10 +91,15 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
         ]))
       ]),
       transition('* => void', [
-        animate(300, style({
-          transform: 'translateX(100px)',
-          opacity: 0
-        }))
+        group([
+          animate(300, style({
+            color: 'red'
+          })),
+          animate(800, style({
+            transform: 'translateX(100px)',
+            opacity: 0
+          }))
+        ])
       ])
     ]),
   ]
